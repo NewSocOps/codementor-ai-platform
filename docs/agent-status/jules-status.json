@@ -1,0 +1,10 @@
+{
+  "agent": "Jules (google-labs-jules[bot])",
+  "last_updated": "2026-01-07T14:30:00Z",
+  "status": "idle",
+  "current_tasks": [],
+  "completed_today": 0,
+  "blockers": [],
+  "next_check_in": "2026-01-08T10:00:00Z",
+  "notes": "Ready for first task assignment. Monitoring /docs/tasks/ for TASK-001."
+}
