@@ -4,6 +4,87 @@
 
 This document provides comprehensive guidelines for AI coding agents (Google Jules, GitHub Copilot Agent, and others) working with the CodeMentor AI codebase.
 
+---
+
+## 🌐 Agent Communication Protocol
+
+### Overview
+
+All AI agents in this project communicate **asynchronously through files** in this repository. This enables:
+- ✅ Multi-agent coordination without API dependencies
+- ✅ Full transparency (all communication in Git history)
+- ✅ Asynchronous work (agents don't need to be online simultaneously)
+- ✅ Human oversight (all tasks and communications are visible)
+
+### Communication Structure
+
+```
+docs/
+├── tasks/              # Task queue for agent assignments
+│   ├── README.md       # Task system documentation
+│   ├── TASK-001-jules-stripe-integration.md
+│   └── TASK-XXX-{agent}-{description}.md
+├── agent-inbox/        # Direct messages between agents
+│   ├── jules-inbox.md
+│   ├── copilot-inbox.md
+│   └── claude-inbox.md
+└── agent-status/       # Current status of each agent
+    ├── jules-status.json
+    ├── copilot-status.json
+    └── claude-status.json
+```
+
+---
+
+## 📋 For Jules (google-labs-jules[bot])
+
+### How to Get Tasks
+
+**Jules, check the `/docs/tasks/` folder regularly for new assignments!**
+
+#### Task Detection
+1. Look for files matching pattern: `TASK-XXX-jules-*.md`
+2. Check status field: `TODO`, `IN_PROGRESS`, `BLOCKED`, or `DONE`
+3. Start with `TODO` tasks marked `Priority: High`
+
+#### Task Workflow
+1. **Find task**: Browse `/docs/tasks/` for your name
+2. **Claim task**: Update status to `IN_PROGRESS` + add start timestamp
+3. **Work on it**: Implement according to specifications
+4. **Update progress**: Commit status updates regularly
+5. **Create PR**: Link PR number in task file
+6. **Mark complete**: Update status to `DONE` when PR is ready
+
+#### Communication
+- **Questions?** Write to `/docs/agent-inbox/claude-inbox.md`
+- **Blocked?** Update task status to `BLOCKED` with reason
+- **Need help?** Tag @AlKhazarof or mention in task file
+
+---
+
+## 🤝 For GitHub Copilot
+
+### How Copilot Works With This System
+
+**Copilot, you assist with:**
+- Code generation during PR reviews
+- Answering questions in `/docs/agent-inbox/copilot-inbox.md`
+- Suggesting improvements to agent-created code
+- Helping with testing and documentation
+
+---
+
+## 🧠 For Claude (me)
+
+### My Responsibilities
+1. **Task Creation**: Write clear, detailed tasks for other agents
+2. **Coordination**: Monitor all agent inboxes and resolve blockers
+3. **Code Review**: Review PRs from Jules and other agents
+4. **Protocol Maintenance**: Update AGENTS.md as needed
+5. **Human Interface**: Communicate with AlKhazarof and team
+
+---
+
 ## 📋 Project Overview
 
 ### Project: CodeMentor AI
@@ -48,6 +129,9 @@ codementor-ai-platform/
 ├── docs/                 # Comprehensive documentation
 │   ├── api/              # API documentation and OpenAPI specs
 │   ├── architecture/     # System architecture diagrams
+│   ├── tasks/            # 🆕 Agent task queue
+│   ├── agent-inbox/      # 🆕 Agent communication
+│   ├── agent-status/     # 🆕 Agent status tracking
 │   ├── deployment/       # Deployment guides
 │   └── performance/      # Performance benchmarks
 ├── monitoring/           # Prometheus/Grafana configurations
