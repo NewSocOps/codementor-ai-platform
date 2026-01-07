@@ -19,7 +19,7 @@ Implement Stripe payment integration for subscription billing on the CodeMentor 
 - Test coverage for all payment flows
 
 ### Business Context
-- Enables Premium tier ($9.99/month) and Enterprise tier ($49.99/month)
+- Enables Starter tier ($19/month) and Pro tier ($49/month)
 - Required for Q1 2026 revenue goal: $500 MRR
 - Critical path item for product launch
 
@@ -63,8 +63,8 @@ Webhooks → Backend → MongoDB
    ```
    STRIPE_SECRET_KEY=sk_test_...
    STRIPE_WEBHOOK_SECRET=whsec_...
-   STRIPE_PRICE_ID_PREMIUM=price_...
-   STRIPE_PRICE_ID_ENTERPRISE=price_...
+   STRIPE_PRICE_ID_STARTER_MONTHLY=price_starter_monthly
+   STRIPE_PRICE_ID_PRO_MONTHLY=price_pro_monthly
    ```
 
 3. **Update User Model** (`backend/models/User.js`)
@@ -72,7 +72,7 @@ Webhooks → Backend → MongoDB
    ```javascript
    subscription: {
      status: { type: String, enum: ['none', 'active', 'canceled', 'past_due'], default: 'none' },
-     tier: { type: String, enum: ['free', 'premium', 'enterprise'], default: 'free' },
+     tier: { type: String, enum: ['free', 'starter', 'pro', 'teams'], default: 'free' },
      stripeCustomerId: String,
      stripeSubscriptionId: String,
      currentPeriodEnd: Date
